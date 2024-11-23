@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niveau du Quiz de Math</title>
+    <style>
+
+        :root {
+            --cor-clara: #f8f8f8;
+            --cor-escura: #6b6b6b;
+            --cor-sombra: #bababa;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            transition: all .3s ease;
+            padding: 10px 14px;
+            background-color: var(--cor-clara);
+            color: var(--cor-escura);
+            box-shadow: 0.1px 0.4px 1px 0.5px var(--cor-sombra);
+            border-radius: 6px;
+            margin: 3px;
+        }
+
+        a:hover {
+            background-color: var(--cor-escura);
+            color: var(--cor-clara);
+            box-shadow: 0.7px 1px 7px 2px var(--cor-sombra);
+            border-radius: 6px;
+        }
+
+        .div {
+            box-sizing: border-box;
+            height: 80vh;
+        }
+
+        footer {
+            font-size: 15px;
+            margin: 0px;
+            background-color: var(--cor-clara);
+            color: var(--cor-escura);
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0.1px 0.4px 1px 0.5px var(--cor-sombra);
+            transition: all 0.3s ease;
+        }
+
+        header {
+            padding: 20px;
+            height: 20vh;
+        }
+
+        footer:hover {
+            margin: 0px;
+            background-color: var(--cor-escura);
+            color: var(--cor-clara);
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0.7px 1px 7px 2px var(--cor-sombra);
+            padding: 10px;
+        }
+
+
+        .a {
+            padding-left: 21vw;
+            padding-right: 21vw;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="div">
+        <header>
+            <h1>Quel niveau tu veux faire?</h1>
+        </header>
+
+        <nav>
+            <a href="https://site-sur-quiz.vercel.app/index-quizmath.html">Niveau 1</a>
+            <a id="btnn2" href="">Niveau 2</a>
+            <a id="btnn3" href="">Niveau 3</a>
+        </nav>
+    </div>
+
+    <div>
+        <a class="a" href="https://site-sur-quiz.vercel.app">Quiz de Maths</a>
+    </div>
+
+    <script>
+
+        const alerta = ("Quiz indisponible dans le moment.")
+
+        document.getElementById("btnn2").addEventListener("click", function(){
+            alert(alerta);
+        });
+
+        document.getElementById("btnn3").addEventListener("click", function(){
+            alert(alerta);
+        });
+
+    </script>
+</body>
+</html>

@@ -184,27 +184,15 @@
 
 
     <script>
-        const mensagem = alert("Exercice corrigé indisponible");
+        const mensagem = function() {
+        alert("Exercice corrigé indisponible");
+        };
 
-        document.getElementById("btn1").addEventListener("click", function(){
-            mensagem;
-        });
-
-        document.getElementById("btn2").addEventListener("click", function(){
-            mensagem;
-        });
-
-        document.getElementById("btn3").addEventListener("click", function(){
-            mensagem;
-        });
-
-        document.getElementById("btn4").addEventListener("click", function(){
-            mensagem;
-        });
-
-        document.getElementById("btn5").addEventListener("click", function(){
-            mensagem;
-        });
+        document.getElementById("btn1").addEventListener("click", mensagem);
+        document.getElementById("btn2").addEventListener("click", mensagem);
+        document.getElementById("btn3").addEventListener("click", mensagem);
+        document.getElementById("btn4").addEventListener("click", mensagem);
+        document.getElementById("btn5").addEventListener("click", mensagem);
     </script>
 </body>
 </html>

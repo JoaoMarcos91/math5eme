@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz de Maths 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #pergunta, #resposta {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        #progresso {
+            width: 100%;
+            background-color: #ddd;
+            margin-bottom: 20px;
+        }
+        #barra-progresso {
+            width: 0;
+            height: 30px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            transition: width 0.5s ease-in-out;
+        }
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .opcao {
+            width: 80%;
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+            color: #6b6b6b;
+            transition: all 0.5s ease;
+        }
+
+        #iniciar {
+            border-radius: 5px;
+            border: 1px solid grey;
+            transition: all .2s linear;
+        }
+
+        #iniciar:hover {
+            border-radius: 5px;
+            border: 1px solid transparent;
+            box-shadow: 2px 2.5px 5px 2px #bababa;
+        }
+
+        #verificar-resposta {
+            border-radius: 5px;
+            border: 1px solid grey;
+            transition: all .2s linear;
+        }
+
+        #verificar-resposta:hover {
+            border-radius: 5px;
+            border: 1px solid transparent;
+            box-shadow: 2px 2.5px 5px 2px #bababa;
+        }
+
+        #proxima-pergunta {
+            border-radius: 5px;
+            border: 1px solid grey;
+            transition: all .2s linear;
+        }
+
+        #proxima-pergunta:hover {
+            border-radius: 5px;
+            border: 1px solid transparent;
+            box-shadow: 2px 2.5px 5px 2px #bababa;
+        }
+
+        #recomecar {
+            border-radius: 5px;
+            border: 1px solid grey;
+            transition: all .2s linear;
+        }
+
+        #recomecar:hover {
+            border-radius: 5px;
+            border: 1px solid transparent;
+            box-shadow: 2px 2.5px 5px 2px #bababa;
+        }
+
+        .opcao:hover {
+            background-color: #6b6b6b;
+            color: #f8f8f8;
+        }
+        .opcao.selecionada {
+            background-color: #d0d0d0;
+        }
+        .opcao.correta {
+            background-color: #aaffaa;
+        }
+        .opcao.incorreta {
+            background-color: #ffaaaa;
+        }
+        #resumo {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .resumo-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .resumo-item.correta {
+            background-color: #e6ffe6;
+        }
+        .resumo-item.incorreta {
+            background-color: #ffe6e6;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="progresso">
+          <div id="barra-progresso"></div>
+      </div>
+      <h1>Quiz de Maths 2</h1>
+      <div id="quiz">
+          <button id="iniciar">Commencer</button>
+      </div>
+      <div id="pergunta"></div>
+      <div id="opcoes" class="opcoes"></div>
+      <div id="resposta"></div>
+      <div id="resumo"></div>
+
+      <script>
+          const perguntas = [
+              {
+                  pergunta: "Quel est le résultat de 5² ?",
+                  opcoes: ["10", "15", "25", "30"],
+                  resposta: 2
+              },
+              {
+                  pergunta: "Quelle fraction est équivalente à 1/2 ?",
+                  opcoes: ["2/4", "3/5", "2/3", "3/6"],
+                  resposta: 0
+              },
+              {
+                  pergunta: "Quel est le périmètre d’un carré de 7 cm de côté ?",
+                  opcoes: ["14 cm", "21 cm", "28 cm", "49 cm"],
+                  resposta: 2
+              },
+              {
+                  pergunta: "Combien de minutes y a-t-il dans 3 heures ?",
+                  opcoes: ["90" ,"120", "150", "180"],
+                  resposta: 3
+              },
+              {
+                  pergunta: "Quel est l'écriture décimale de 3/4 ?",
+                  opcoes: ["0,25", "0,5", "0,75", "1,25"],
+                  resposta: 2
+              },
+              {
+                  pergunta: "Complète : 2x + 3 = 9. Quelle est la valeur de x ?",
+                  opcoes: ["2", "3", "6", "9"],
+                  resposta: 1
+              },
+              {
+                  pergunta: "Combien y a-t-il de faces dans un cube ?",
+                  opcoes: ["4" ,"6" ,"8","12"],
+                  resposta: 1
+              },
+              {
+                  pergunta: "Quel est le contraire de −7 ?",
+                  opcoes: ["-14", "0", "7", "-1"],
+                  resposta: 2
+              },
+              {
+                  pergunta: "Quel est le résultat de 2,5 × 4 ?",
+                  opcoes: ["6", "8", "10", "12"],
+                  resposta: 2
+              },
+              {
+                  pergunta: "Dans un sac, il y a 5 billes rouges, 3 billes bleues et 2 billes vertes. Quelle est la probabilité de tirer une bille rouge au hasard ?",
+                  opcoes: ["5/(5 + 2 + 2)", "5/10", "5/9", "5/12"],
+                  resposta: 1
+              }
+          ];
+
+          let perguntasEmbaralhadas = [];
+          let perguntaAtual = 0;
+          let respostaSelecionada = null;
+          let respostasUsuario = [];
+          const quizDiv = document.getElementById('quiz');
+          const perguntaDiv = document.getElementById('pergunta');
+          const opcoesDiv = document.getElementById('opcoes');
+          const respostaDiv = document.getElementById('resposta');
+          const barraProgresso = document.getElementById('barra-progresso');
+          const resumoDiv = document.getElementById('resumo');
+
+          function embaralharArray(array) {
+              for (let i = array.length - 1; i > 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [array[i], array[j]] = [array[j], array[i]];
+              }
+          }
+
+          function iniciarQuiz() {
+              perguntasEmbaralhadas = [...perguntas];
+              embaralharArray(perguntasEmbaralhadas);
+              perguntaAtual = 0;
+              respostasUsuario = [];
+              atualizarBarraProgresso();
+              mostrarPergunta();
+              resumoDiv.innerHTML = '';
+          }
+
+          function mostrarPergunta() {
+              if (perguntaAtual < perguntasEmbaralhadas.length) {
+                  const perguntaObj = perguntasEmbaralhadas[perguntaAtual];
+                  perguntaDiv.textContent = `Question ${perguntaAtual + 1} de ${perguntasEmbaralhadas.length}: ${perguntaObj.pergunta}`;
+                  respostaDiv.textContent = '';
+                  opcoesDiv.innerHTML = '';
+                  respostaSelecionada = null;
+
+                  perguntaObj.opcoes.forEach((opcao, index) => {
+                      const botao = document.createElement('button');
+                      botao.textContent = opcao;
+                      botao.classList.add('opcao');
+                      botao.onclick = () => selecionarResposta(index);
+                      opcoesDiv.appendChild(botao);
+                  });
+
+                  quizDiv.innerHTML = '<button id="verificar-resposta" onclick="verificarResposta()">Vérifier votre réponse</button>';
+              } else {
+                  mostrarResumo();
+              }
+          }
+
+          function selecionarResposta(index) {
+              respostaSelecionada = index;
+              document.querySelectorAll('.opcao').forEach((botao, i) => {
+                  botao.classList.toggle('selecionada', i === index);
+              });
+          }
+          function verificarResposta() {
+              if (respostaSelecionada === null) {
+                  alert('Veuillez sélectionner une réponse.');
+                  return;
+              }
+
+              const perguntaObj = perguntasEmbaralhadas[perguntaAtual];
+              const opcoes = document.querySelectorAll('.opcao');
+              opcoes[perguntaObj.resposta].classList.add('correta');
+
+              respostasUsuario.push({
+                  pergunta: perguntaObj.pergunta,
+                  respostaUsuario: respostaSelecionada,
+                  respostaCorreta: perguntaObj.resposta
+              });
+
+              if (respostaSelecionada === perguntaObj.resposta) {
+                  respostaDiv.textContent = 'Correct!';
+              } else {
+                  respostaDiv.textContent = 'Incorrect. La réponse correcte est: ' + perguntaObj.opcoes[perguntaObj.resposta];
+                  opcoes[respostaSelecionada].classList.add('incorreta');
+              }
+
+              quizDiv.innerHTML = '<button id="proxima-pergunta" onclick="proximaPergunta()">Question Suivante</button>';
+          }
+
+          function proximaPergunta() {
+              perguntaAtual++;
+              atualizarBarraProgresso();
+              mostrarPergunta();
+          }
+
+          function atualizarBarraProgresso() {
+              const progresso = (perguntaAtual / perguntasEmbaralhadas.length) * 100;
+              barraProgresso.style.width = progresso + '%';
+              barraProgresso.textContent = Math.round(progresso) + '%';
+          }
+
+          function mostrarResumo() {
+              perguntaDiv.textContent = 'Quiz terminé!';
+              opcoesDiv.innerHTML = '';
+              respostaDiv.textContent = '';
+              quizDiv.innerHTML = '<button id="recomecar" onclick="iniciarQuiz()">Recommencer</button>';
+
+              let html = '<h2>Corrigé:</h2>';
+              let pontuacao = 0;
+
+              respostasUsuario.forEach((resposta, index) => {
+                  const perguntaObj = perguntasEmbaralhadas[index];
+                  const estaCorreta = resposta.respostaUsuario === resposta.respostaCorreta;
+                  if (estaCorreta) pontuacao++;
+
+                  html += `
+                      <div class="resumo-item ${estaCorreta ? 'correta' : 'incorreta'}">
+                          <strong>Question ${index + 1}:</strong> ${resposta.pergunta}<br>
+                          <strong>Ta réponse</strong> ${perguntaObj.opcoes[resposta.respostaUsuario]}<br>
+                          ${!estaCorreta ? `<strong>Réponse correcte:</strong> ${perguntaObj.opcoes[resposta.respostaCorreta]}<br>` : ''}
+                      </div>
+                  `;
+              });
+
+              html += `<h3>Score final: ${pontuacao} sur ${perguntasEmbaralhadas.length}</h3>`;
+              resumoDiv.innerHTML = html;
+          }
+
+          document.getElementById('iniciar').addEventListener('click', iniciarQuiz);
+      </script>
+  </body>
+  </html>
